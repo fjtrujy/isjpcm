@@ -14,26 +14,30 @@ IOP_BIN_DIR = bin/
 IOP_SRC_DIR = src/
 
 IOP_BIN  = $(IOP_BIN_DIR)isjpcm.irx
-IOP_OBJS = hw.o sjpcm_irx.o spu2.o imports.o
-IOP_OBJS := $(IOP_OBJS:%=$(IOP_OBJS_DIR)%)
+IOP_OBJS = $(IOP_SRC_DIR)/hw.o $(IOP_SRC_DIR)/sjpcm_irx.o $(IOP_SRC_DIR)/spu2.o $(IOP_SRC_DIR)/imports.o
 
 IOP_CFLAGS += -fno-builtin-printf
 # IOP_CFLAGS += -DISJPCM
 IOP_CFLAGS += -DLIBSD
 IOP_INCS   += -I$(PS2SDK)/iop/include/ -I$(PS2SDK)/common/include/ -I$(PS2SDKSRC)/iop/sound/libsd/src/include/ -I./src/
 
-all: $(IOP_OBJS_DIR) $(IOP_BIN_DIR) $(IOP_BIN) builtin
+# all: $(IOP_OBJS_DIR) $(IOP_BIN_DIR) $(IOP_BIN) builtin
 
-builtin:
-	bin2c $(IOP_BIN) $(IOP_BIN_DIR)isjpcmIrx.c isjpcmIrx
+# builtin:
+# 	bin2c $(IOP_BIN) $(IOP_BIN_DIR)isjpcmIrx.c isjpcmIrx
 
-clean:
-	rm -f -r $(IOP_OBJS_DIR) $(IOP_BIN_DIR)
+# clean:
+# 	rm -f -r $(IOP_OBJS_DIR) $(IOP_BIN_DIR)
 
-install:
-	mkdir -p $(PS2DEV)/isjpcm/bin
-	cp $(IOP_BIN) $(PS2DEV)/isjpcm/bin
+# install:
+# 	mkdir -p $(PS2DEV)/isjpcm/bin
+# 	cp $(IOP_BIN) $(PS2DEV)/isjpcm/bin
 
 include $(PS2SDK)/Defs.make
-# include $(PS2SDK)/samples/Makefile.iopglobal
+include $(PS2SDK)/samples/Makefile.pref
+# include $(PS2SDK)/samples/Makefile.iopglobal 
 include ./Rules.make
+
+# include $(PS2SDK)/Defs.make
+# # include $(PS2SDK)/samples/Makefile.iopglobal
+# include ./Rules.make
